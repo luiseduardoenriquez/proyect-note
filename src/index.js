@@ -55,7 +55,7 @@ app.use(flash());            // el orden de como se llaman las cosas aqui influy
         //console.log(res.locals.user);           // Para hacer seguimiento de que estaba trayendo la variable y saber si me estaba trayendo todo lo que necesitaba
         next();                                         // Siempre que usemos esto, ponerlo para que no se nos olvide y se nos quede recargando
     });                                                 // Asi se declaran las variables goblales para usarlas en todo el proyecto
-
+                                                        
 
 // Routes                                            para configurar las rutas 
 app.use(require('./routes/index'));
@@ -71,3 +71,6 @@ app.use(express.static(path.join(__dirname, 'public')));    // Le damos la infor
 app.listen(app.get('port'), function(){
     console.log(`mi servidor esta corriendo en el puerto: ${app.get('port')}`);
 });
+
+
+// Solo para mostrar como serian los cambios ya en GITHUB :)
