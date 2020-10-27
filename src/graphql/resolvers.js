@@ -21,15 +21,39 @@
 // RESOLVER ES EL ENCARGADO DE AGARRAR LOS MODELOS
 
 const Note = require('../models/Note');
+const User = require('../models/User');
+
 const resolvers = {
     Query: {
         async oneNote(_,{_id}){
             const oneNote = await Note.findById(_id);
             return oneNote;
         },
+        async oneUser(_,{_id}){
+            const oneUsuario = await User.findById(_id);
+            return oneUsuario;
+        },
+        async Macht(_,{correo, contra}){
+
+            const machtCorreo = await User.findOne({email: correo})
+            
+            if (machtCorreo) {
+                const match = await machtCorreo.matchPassword(contra);
+                if (match) {
+                    return machtCorreo;
+                }
+            }else{
+                return null;
+            }
+
+        },
         async allNotes(){
             const notes = await Note.find();
             return notes;
+        },
+        async allUsuarios(){
+            const usuarios = await User.find();
+            return usuarios;
         }
     },
     Mutation: {
@@ -37,8 +61,12 @@ const resolvers = {
             const newNote = new Note(input);
             //console.log(newNote);
             return await newNote.save();
-             
-
+        },
+        async createUser(_,{ input }){
+            const newUser = new User(input);
+            newUser.password = await newUser.encryptPassword(newUser.password);
+            console.log(newUser);
+            return await newUser.save();
         },
         async deleteNota(_, { _id }){
            return await Note.findByIdAndDelete(_id);
