@@ -5,26 +5,23 @@ import {toast} from 'react-toastify';
 
 import {gql} from 'apollo-boost';
 
-
 const CREATE_USER = gql`
 
-    mutation CREATEUSER($name: String!, $email: String!, $password: String!){
-        
-            createUser(input:{
-              name:$name,
-              email:$email
-              password:$password
-            }){
-              _id
-              name
-              email
-              password
-            }
-          
-    }
+mutation CREATEUSER($name: String!, $email: String!, $password: String, $rol: String){
+  createUser(input:{
+    name:$name
+    email:$email
+    password:$password
+    rol:$rol
+  }){
+    name
+    email
+    password
+    rol
+  }
+}
 
 `;
-
 
 
 const RegistrarseNavigation = () => {
@@ -34,12 +31,15 @@ const RegistrarseNavigation = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [PasswordMatch, setPasswordMatch] = useState("")
+    const [PasswordMatch, setPasswordMatch] = useState("");
+    const [rol, setRol] = useState("");
+
+    console.log(rol)
 
     const [createUser,{data}] = useMutation(CREATE_USER);
     
 
-    console.log(data)
+    //console.log(data)
 
     useEffect(() => {
       if (data === undefined) {
@@ -79,7 +79,7 @@ const RegistrarseNavigation = () => {
                   e.preventDefault();
 
                   if (password === PasswordMatch) {
-                    await createUser({variables: {name,email,password}})
+                    await createUser({variables: {name,email,password,rol}})
                   }else{
                     toast.warning('Las contraseñas no coinciden');
                   }
@@ -109,6 +109,14 @@ const RegistrarseNavigation = () => {
                     </div>
 
                   </div>
+
+                  <select className="form-control mt-2" id="exampleFormControlSelect1" onChange={e => setRol(e.target.value)}  >
+
+                      <option>Roles</option>
+                      <option value="usuario">Usuario</option>
+                      <option value="admin">Admin</option>
+
+                  </select>
 
                   <hr className="my-4" />
                   

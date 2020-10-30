@@ -6,6 +6,7 @@ const typeDefs = `
         type Query {
             oneNote(_id: ID):Nota
             oneUser(_id: ID):Usuario
+
             Macht(correo: String, contra: String):Usuario
 
             SimilaryEmail(correo: String):Usuario
@@ -18,6 +19,9 @@ const typeDefs = `
             createNota(input: NotaInput): Nota
             createUser(input: UsuarioInput): Usuario
 
+            deleteUser(_id: ID): Nota
+            uptadeUser(_id: ID, input: UsuarioInput): Usuario
+
             deleteNota(_id: ID): Nota
             uptadeNota(_id: ID, input: NotaInput): Nota
             
@@ -28,8 +32,16 @@ const typeDefs = `
             name: String
             email: String
             password: String
+            rol: String
         }
- 
+        
+        input UsuarioInput {
+            name: String!
+            email: String!
+            password: String
+            rol: String
+        }
+
         type Nota {
             _id: ID
             title: String
@@ -42,11 +54,6 @@ const typeDefs = `
             description: String!
         }
 
-        input UsuarioInput {
-            name: String!
-            email: String!
-            password: String!
-        }
 
 `;
 

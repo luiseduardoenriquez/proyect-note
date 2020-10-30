@@ -7,6 +7,8 @@ import {useParams} from 'react-router-dom';
 import { BsBookmarkPlus } from "react-icons/bs";
 
 import {gql} from 'apollo-boost';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 
 
@@ -61,66 +63,82 @@ const NotasForm = () => {
           // useMatation y el nombre, estamos diciendo que entre ahi
           // y luego en la constante que vamos a usar esa funcion, por asi decirlo
           // Y pasarle los campos titulo description etc
-          return (
-              <div className="row">
-                  <div className="col-md-6 offset-md-4">
-                      <div className="card">
-                          <div className="card-body">
-                              
-                                  <div className="card-title ">
-                                      <h3 className="card-text "> <BsBookmarkPlus/> Nueva Nota</h3>
-                                  </div>
-
-                              <form onSubmit={async (e) => {
-                                  e.preventDefault(); // Prevenie que el formulario se refresque
 
 
 
-                                  //console.log(title, description) ahora lo que tenemos que hacer es usar un modulo llamado useMutation, asi como anterior mente usamos el useQuery
-                                  // usamos la funcion que acabamos de sacar del use ---> const [createNota] = useMutation(CREATENOTA) y le pasamos los parametros que le definimos
-                                  await createNota({ variables: { title, description } }); // -> en el nivel de variabbles estariamos invocando al CREATENOTA sin necesidad de mencionarlo
+        if (cookies.get("rol")) {  
 
+                return (
+                    <div className="row">
+                        <div className="col-md-6 offset-md-4">
+                            <div className="card">
+                                <div className="card-body">
+                                    
+                                        <div className="card-title ">
+                                            <h3 className="card-text "> <BsBookmarkPlus/> Nueva Nota</h3>
+                                        </div>
 
-                                  //Ya con esto guardaria
-                                  toast.success('Nueva nota agregada');
-                                  window.location.href="/all-Note";
-                                  //history.push('/all-Note');
-
-                                  //window.location.href="/all-Note";
-                                  // ya lo que podemos hacer es hacer una redireccion bien chevere
-                              } }>
-
-                                  <div className="form-group">
-                                      <input type="text" placeholder="Titulo" id="title" className="form-control" onChange={e => setTitle(e.target.value)}
-                                          value={title } //colocamos la variable del useState para que se pueda ver
-                                      />
-                                  </div>
-
-                                  <div className="form-group">
-                                      <input type="text" placeholder="Descripcion" className="form-control"
-                                          onChange={e => setDescription(e.target.value)}
-                                          value={description } />
-                                  </div>
-
-                                  {id ?
-                                      <button className="btn btn-block btn-warning">
-                                          Editar
-                                      </button>
-                                      :
-                                      <button className="btn btn-block btn-primary">
-                                                       Guardar
-                                      </button>}
+                                    <form onSubmit={async (e) => {
+                                        e.preventDefault(); // Prevenie que el formulario se refresque
 
 
 
-                              </form>
+                                        //console.log(title, description) ahora lo que tenemos que hacer es usar un modulo llamado useMutation, asi como anterior mente usamos el useQuery
+                                        // usamos la funcion que acabamos de sacar del use ---> const [createNota] = useMutation(CREATENOTA) y le pasamos los parametros que le definimos
+                                        await createNota({ variables: { title, description } }); // -> en el nivel de variabbles estariamos invocando al CREATENOTA sin necesidad de mencionarlo
 
 
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          );
+                                        //Ya con esto guardaria
+                                        toast.success('Nueva nota agregada');
+                                        window.location.href="/all-Note";
+                                        //history.push('/all-Note');
+
+                                        //window.location.href="/all-Note";
+                                        // ya lo que podemos hacer es hacer una redireccion bien chevere
+                                    } }>
+
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Titulo" id="title" className="form-control" onChange={e => setTitle(e.target.value)}
+                                                value={title } //colocamos la variable del useState para que se pueda ver
+                                            />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Descripcion" className="form-control"
+                                                onChange={e => setDescription(e.target.value)}
+                                                value={description } />
+                                        </div>
+
+                                        {id ?
+                                            <button className="btn btn-block btn-warning">
+                                                Editar
+                                            </button>
+                                            :
+                                            <button className="btn btn-block btn-primary">
+                                                            Guardar
+                                            </button>}
+
+
+
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+
+            }else{
+
+                return(
+                    <div className="jumbotron bg-danger">
+                        <h1 className="display-4 letrasWN"> Upss.. No tienes permiso a esta area</h1>
+                        <p className="letrasWN">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, alias?</p>
+                    </div>       
+                )
+        
+          }
       }
 
 export default NotasForm;

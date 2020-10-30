@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './NotasCss.css'
 
 import {useHistory} from 'react-router-dom';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import {useMutation, useQuery} from '@apollo/client';  //useQuery para hacer consultas
 import {gql} from '@apollo/client';
 
@@ -18,15 +18,6 @@ const cookies = new Cookies();
 console.log(cookies.get('name'))
 console.log(cookies.get('email')) */
 
-if (cookies.get('name')) {
-    //alert("Estamos melos en esta condicion")
-
-} else{
-
-    //alert("No tenemos acceso")
-    //window.location.href="/"
-    
-}
 
 // Se importa el apollo boost para poder hacer la consulta por medio del api
 
@@ -93,8 +84,8 @@ const NotasList  =  () => {
     const { loading, error, data } = useQuery(GET_ALLNOTES);
     const [deleteNota] = useMutation(DELETE_NOTE);
 
-    
-    
+    //alert(cookies.get("rol"))
+
     
    
     useEffect(() => {
@@ -114,9 +105,12 @@ const NotasList  =  () => {
 
     if(loading) return <p>Cargando mensajes...</p>
     if(error) {<p>Hubo un error...</p>} 
-    
-    
 
+    //alert(cookies.get("rol") !== "admin")
+
+    if (cookies.get("rol")) {
+        
+    
     
     return (
 
@@ -180,6 +174,20 @@ const NotasList  =  () => {
 
             
     )
+
+}else{
+
+
+    return(
+        <div className="jumbotron bg-danger">
+            <h1 className="display-4 letrasWN"> Upss.. No tienes permiso a esta area</h1>
+            <p className="letrasWN">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, alias?</p>
+        </div>       
+     )
+
+
+
+}
 
 }
 export default NotasList;

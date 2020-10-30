@@ -16,6 +16,10 @@ import IniciarNavigation from "./components/IniciarNavigation";
 import RegistrarseNavigation from "./components/RegistrarseNavigation";
 import NotasEdit from "./components/NotasEdit";
 
+import UsuariosList from "./components/UsuariosList";
+import UserEdit from "./components/UserEdit";
+
+
 
 import 'react-toastify/dist/ReactToastify.css';
 import "bootswatch/dist/cosmo/bootstrap.min.css";
@@ -38,6 +42,9 @@ function App() {
               <Route exact path="/all-Note" component={NotasList} />
               <Route exact path="/new-Note" component={NotasForm} />
               <Route exact path="/notas/edit/:id" component={NotasEdit} />
+
+              <Route exact path="/usuarios/:id" component={UserEdit} />
+              <Route exact path="/all-usuarios" component={UsuariosList} />
 
               <Route exact path="/iniciar" component={IniciarNavigation} />
               <Route exact path="/registrarse" component={RegistrarseNavigation} />

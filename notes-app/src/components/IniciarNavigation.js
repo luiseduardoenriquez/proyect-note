@@ -16,6 +16,7 @@ const MATCH_USER = gql`
       _id
       name
       email
+      rol
     }
   }
 `;
@@ -57,6 +58,8 @@ const IniciarNavigation = () => {
         cookies.set('id', login.Macht.id, {path:"/"})
         cookies.set('name', login.Macht.name, {path:"/"})
         cookies.set('email', login.Macht.email, {path:"/"})
+        cookies.set('rol', login.Macht.rol, {path:"/"})
+
 
         toast.success(`Bienvenido ${login.Macht.name}`);
 

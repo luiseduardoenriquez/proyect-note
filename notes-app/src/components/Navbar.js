@@ -9,9 +9,10 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 // Recibiendo las variables de session para poder empezar a hacer condiciones con ellas
-/* console.log(cookies.get('id'))
+console.log(cookies.get('id'))
 console.log(cookies.get('name'))
-console.log(cookies.get('email')) */
+console.log(cookies.get('email'))
+console.log(cookies.get('rol'))
 
 
 
@@ -20,6 +21,7 @@ function cerrarSession(){
     cookies.remove('id',{path:"/"})
     cookies.remove('name',{path:"/"})
     cookies.remove('email',{path:"/"})
+    cookies.remove('rol',{path:"/"})
 
     window.location.href="/"
 }
@@ -74,6 +76,15 @@ const Navbar = () => (
                             cookies.get('name') ?
                             <li className="nav-item">
                             <Link className="nav-link" to="/new-Note"> <BsBookmarkPlus/> Nueva Nota</Link>
+                            </li>
+
+                            : <p></p> 
+                        }
+
+                        {
+                            cookies.get('rol') === "admin" ?
+                            <li className="nav-item">
+                            <Link className="nav-link" to="/all-usuarios"> <BsBookmarkPlus/> Lista de usuarios </Link>
                             </li>
 
                             : <p></p> 

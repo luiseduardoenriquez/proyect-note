@@ -30,8 +30,9 @@ const resolvers = {
             return oneNote;
         },
         async oneUser(_,{_id}){
-            const oneUsuario = await User.findById(_id);
-            return oneUsuario;
+            const oneUser = await User.findById(_id);
+            console.log(oneUser)
+            return oneUser;
         },
         async Macht(_,{correo, contra}){
 
@@ -94,6 +95,12 @@ const resolvers = {
         },
         async deleteNota(_, { _id }){
            return await Note.findByIdAndDelete(_id);
+        },
+        async deleteUser(_,{_id}){
+            return await User.findByIdAndDelete(_id)
+        },
+        async uptadeUser(_,{_id, input}){
+            return await User.findByIdAndUpdate(_id, input, {new: true})
         },
         async uptadeNota(_, { _id,input }){
             return await Note.findByIdAndUpdate(_id, input, {new: true});

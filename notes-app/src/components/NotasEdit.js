@@ -57,7 +57,7 @@ const NotasEdit =  () => {
     if(loading) return <p>Cargando mensajes...</p>
     if(error) {<p>Hubo un error...</p>} 
     
-    console.log(data)
+    //console.log(data)
 
     //if (loading) return "cargando"; 
     
