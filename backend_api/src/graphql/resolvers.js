@@ -47,6 +47,16 @@ const resolvers = {
             }
 
         },
+        async SimilaryEmail(_,{correo}){
+            const similaryemail = await User.findOne({email: correo})
+            //console.log(similaryemail)
+            //return similaryemail
+            if (similaryemail) {
+                return similaryemail;
+            }else{
+                return null;
+            } 
+        },
         async allNotes(){
             const notes = await Note.find();
             return notes;
@@ -64,9 +74,23 @@ const resolvers = {
         },
         async createUser(_,{ input }){
             const newUser = new User(input);
-            newUser.password = await newUser.encryptPassword(newUser.password);
-            console.log(newUser);
-            return await newUser.save();
+
+            const machtCorreo = await User.findOne({email: newUser.email})
+
+            //console.log(machtCorreo.length );
+            if (machtCorreo == null) {
+                
+                newUser.password = await newUser.encryptPassword(newUser.password);
+                
+                return await newUser.save();
+
+            }else{
+
+                return null
+            }
+
+            
+
         },
         async deleteNota(_, { _id }){
            return await Note.findByIdAndDelete(_id);

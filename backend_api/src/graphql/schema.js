@@ -8,8 +8,19 @@ const typeDefs = `
             oneUser(_id: ID):Usuario
             Macht(correo: String, contra: String):Usuario
 
+            SimilaryEmail(correo: String):Usuario
+
             allNotes: [Nota]
             allUsuarios: [Usuario]
+        }
+        
+        type Mutation {
+            createNota(input: NotaInput): Nota
+            createUser(input: UsuarioInput): Usuario
+
+            deleteNota(_id: ID): Nota
+            uptadeNota(_id: ID, input: NotaInput): Nota
+            
         }
 
         type Usuario{
@@ -24,15 +35,7 @@ const typeDefs = `
             title: String
             description: String
         }
-
-        type Mutation {
-            createNota(input: NotaInput): Nota
-            createUser(input: UsuarioInput): Usuario
-
-            deleteNota(_id: ID): Nota
-            uptadeNota(_id: ID, input: NotaInput): Nota
-            
-        }
+        
 
         input NotaInput {
             title: String!

@@ -2,7 +2,9 @@
 import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import {toast} from 'react-toastify';
-import {useHistory, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+
+import { BsBookmarkPlus } from "react-icons/bs";
 
 import {gql} from 'apollo-boost';
 
@@ -41,7 +43,7 @@ const CREATE_NOTE = gql`
 // llamada "e" La cual se autoproclama cuando se va cambiando el evento y va setiando o llenando la variable title , en el useState
 const NotasForm = () => {
 
-     const history = useHistory();
+     //const history = useHistory();
      const {id} = useParams();
      
      
@@ -66,7 +68,7 @@ const NotasForm = () => {
                           <div className="card-body">
                               
                                   <div className="card-title ">
-                                      <h3 className="card-text ">Nueva Nota</h3>
+                                      <h3 className="card-text "> <BsBookmarkPlus/> Nueva Nota</h3>
                                   </div>
 
                               <form onSubmit={async (e) => {

@@ -7,9 +7,22 @@ const Nosotros = () => {
                 <p className="lead"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, alias?</p>
                 <hr className="my-4" />
                 
-                <div>
-                    
+                <div className="row container">
+
+                    <div className="col">
+                        <img src="/img1.jpg"  className="img1" alt="La foto esta buena" />
+                    </div>
+
+                    <div className="col">
+                        <img src="/img2.jpg"  className="img1" alt="La foto esta buena" />
+                    </div>
+
+                    <div className="col">
+                         <img src="/img3.jpg"  className="img1" alt="La foto esta buena" />
+                    </div>
+
                 </div>
+                <hr className="my-4" />
 
                 <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum veniam ex possimus aspernatur

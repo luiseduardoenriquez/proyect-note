@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; // este es el enrutador
 import {ToastContainer} from 'react-toastify';
+
+
 // Es similar a como se definen las rutas en eXpress, es decirle a donde se quiere dirigir
 // Y el exact es para que exactamente coloque ese componente, ya que si creamos otra ruta llamada
 //      ( /notas ) como en cierta parte de cumple el "/" entonces se colocaria ese, y el otro que llamemos
@@ -14,13 +16,13 @@ import IniciarNavigation from "./components/IniciarNavigation";
 import RegistrarseNavigation from "./components/RegistrarseNavigation";
 import NotasEdit from "./components/NotasEdit";
 
-import {UserContextProvider} from './components/UserContext'
+
 import 'react-toastify/dist/ReactToastify.css';
 import "bootswatch/dist/cosmo/bootstrap.min.css";
 
 function App() {
   return (
-    <UserContextProvider>
+    
 
         <Router>
 
@@ -47,7 +49,7 @@ function App() {
           <ToastContainer/>
         </Router>
         
-    </UserContextProvider>
+    
   );
 }
 

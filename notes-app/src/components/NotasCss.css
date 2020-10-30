@@ -1,3 +1,62 @@
+
+  body::-webkit-scrollbar {
+        width: 8px;     /* Tamaño del scroll en vertical */
+        height: 8px;    /* Tamaño del scroll en horizontal */
+          /* Ocultar scroll display: none; */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background: #e1e4;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #e1e4;
+        border-radius: 4px;
+    }
+
+    body::-webkit-scrollbar-track:hover,
+    body::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+    }
+
 .notas-card-flow:hover{
     border: 1px solid #333;
+}
+
+.iconlogout{
+    height: 18px;
+    width: 18px;
+}
+
+.img1{
+    height: 400px;
+    width: 300px;
+}
+
+.imgregistrarse{
+    height: 300px;
+    width: 300px;
+    margin-left: 50px;
+}
+
+.img2{
+    height: 400px;
+    max-width: 1000px;
+    min-width: 400px;
+}
+
+.logo{
+    height: 270px;
+    width: 270px;
+}
+
+.pstName{
+    margin-right: 50px;
+    margin-top: 2px;
 }
