@@ -24,7 +24,8 @@ const DELETE_USER = gql`
     mutation DeleteUser($_id:ID){
         deleteUser(_id:$_id){
         _id
-        title
+        name
+        email
         }
     }
 

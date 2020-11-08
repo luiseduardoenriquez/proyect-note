@@ -20,8 +20,7 @@
 
 // RESOLVER ES EL ENCARGADO DE AGARRAR LOS MODELOS
 
-const Note = require('../models/Note');
-const User = require('../models/User');
+const Note = require('../../models/Note');
 
 const resolvers = {
     Query: {
@@ -29,78 +28,19 @@ const resolvers = {
             const oneNote = await Note.findById(_id);
             return oneNote;
         },
-        async oneUser(_,{_id}){
-            const oneUser = await User.findById(_id);
-            console.log(oneUser)
-            return oneUser;
-        },
-        async Macht(_,{correo, contra}){
-
-            const machtCorreo = await User.findOne({email: correo})
-            
-            if (machtCorreo) {
-                const match = await machtCorreo.matchPassword(contra);
-                if (match) {
-                    return machtCorreo;
-                }
-            }else{
-                return null;
-            }
-
-        },
-        async SimilaryEmail(_,{correo}){
-            const similaryemail = await User.findOne({email: correo})
-            //console.log(similaryemail)
-            //return similaryemail
-            if (similaryemail) {
-                return similaryemail;
-            }else{
-                return null;
-            } 
-        },
         async allNotes(){
             const notes = await Note.find();
             return notes;
         },
-        async allUsuarios(){
-            const usuarios = await User.find();
-            return usuarios;
-        }
+        
     },
     Mutation: {
         async createNota(_,{ input }){
             const newNote = new Note(input);
-            //console.log(newNote);
             return await newNote.save();
-        },
-        async createUser(_,{ input }){
-            const newUser = new User(input);
-
-            const machtCorreo = await User.findOne({email: newUser.email})
-
-            //console.log(machtCorreo.length );
-            if (machtCorreo == null) {
-                
-                newUser.password = await newUser.encryptPassword(newUser.password);
-                
-                return await newUser.save();
-
-            }else{
-
-                return null
-            }
-
-            
-
         },
         async deleteNota(_, { _id }){
            return await Note.findByIdAndDelete(_id);
-        },
-        async deleteUser(_,{_id}){
-            return await User.findByIdAndDelete(_id)
-        },
-        async uptadeUser(_,{_id, input}){
-            return await User.findByIdAndUpdate(_id, input, {new: true})
         },
         async uptadeNota(_, { _id,input }){
             return await Note.findByIdAndUpdate(_id, input, {new: true});

@@ -1,62 +1,27 @@
 const graphql_tools = require('graphql-tools').makeExecutableSchema;
-const resolvers = require('./resolvers');
-
-const typeDefs = `
-
-        type Query {
-            oneNote(_id: ID):Nota
-            oneUser(_id: ID):Usuario
-
-            Macht(correo: String, contra: String):Usuario
-
-            SimilaryEmail(correo: String):Usuario
-
-            allNotes: [Nota]
-            allUsuarios: [Usuario]
-        }
-        
-        type Mutation {
-            createNota(input: NotaInput): Nota
-            createUser(input: UsuarioInput): Usuario
-
-            deleteUser(_id: ID): Nota
-            uptadeUser(_id: ID, input: UsuarioInput): Usuario
-
-            deleteNota(_id: ID): Nota
-            uptadeNota(_id: ID, input: NotaInput): Nota
-            
-        }
-
-        type Usuario{
-            _id: ID
-            name: String
-            email: String
-            password: String
-            rol: String
-        }
-        
-        input UsuarioInput {
-            name: String!
-            email: String!
-            password: String
-            rol: String
-        }
-
-        type Nota {
-            _id: ID
-            title: String
-            description: String
-        }
-        
-
-        input NotaInput {
-            title: String!
-            description: String!
-        }
 
 
-`;
 
+// Aca se agregarian - Importarian todos los esquemas
+const NotaSchema = require('./Schemas/NotaSchema');
+const UsuarioSchema = require('./Schemas/UsuarioSchema');
+
+// Aca se agregarian - Importarian todos los resolver
+const NotaResolver = require('./Resolvers/NotaResolver');
+const UsuarioResolver = require('./Resolvers/UsuarioResolver');
+
+
+
+
+// Todos los ESQUEMAS - TypeDefs se agregan atravez de una coma en este array
+const typeDefs = [NotaSchema, UsuarioSchema];
+
+// Todos los RESOLVER se agregan atravez de una coma en este array
+const resolvers = [NotaResolver, UsuarioResolver];
+
+
+
+// Convertir 
 const schema = graphql_tools({
     typeDefs:typeDefs,
     resolvers:resolvers
